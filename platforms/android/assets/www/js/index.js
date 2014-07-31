@@ -16,6 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var lat = '';
+var longitude = '';
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -38,18 +41,41 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         initializeMap();
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);   
         console.log('Received Event: ' + id);
     }
 };
 function initializeMap() {
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });  
+	autocomplete = new google.maps.places.Autocomplete(
+     	/** @type {HTMLInputElement} */(document.getElementById('location'))
+      		//{ types: ['geocode'] }
+      		);
+    
+  	// When the user selects an address from the dropdown,
+  	// populate the address fields in the form.
+  	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    	changeMap();}
+    	); 
+};
+
+function changeMap() {
+	//document.getElementById('location').value = "";
+	//x.setAttribute("value","");
+	
+	var place = autocomplete.getPlace();
+	lat = place.geometry.location.lat();
+	longitude = place.geometry.location.lng();
 	var mapOptions = {
-		center: new google.maps.LatLng(43.069452, -89.411373),
-		zoom: 11,
+		center: new google.maps.LatLng(lat, longitude),
+		zoom: 18,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-};
+    autocomplete.set('place',void(0));
+	
+
+	
+}
 
 var onSuccess = function(position) {
     alert('Latitude: '          + position.coords.latitude          + '\n' +
@@ -60,6 +86,14 @@ var onSuccess = function(position) {
           'Heading: '           + position.coords.heading           + '\n' +
           'Speed: '             + position.coords.speed             + '\n' +
           'Timestamp: '         + position.timestamp                + '\n');
+    lat = position.coords.latitude;
+	var mapOptions = {
+		center: new google.maps.LatLng(lat, position.coords.longitude),
+		zoom: 18,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
 };
 
 // onError Callback receives a PositionError object
