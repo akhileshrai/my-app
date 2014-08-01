@@ -119,7 +119,7 @@ function changeMap() {
       		var myRoute = result.routes[0].legs[0];
       		logError('hi'+ myRoute.distance.value/1000);
    			var resultDist = document.getElementById("resultDist");
-			resultDist.innerHTML = myRoute.distance.text;
+			resultDist.innerHTML = "Distance: " + myRoute.distance.text;
 			var resultFare = document.getElementById("resultFare");
 			resultFare.innerHTML = calcFare(myRoute.distance.value);
 			
@@ -155,6 +155,7 @@ function calcFare(dist){
 		fare = 25;
 	}
 	else fare = dist*13;
+	fare = "Fare: Rs. " + fare;
 	return fare;
 }
 
