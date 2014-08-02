@@ -25,6 +25,10 @@ var end_lng = '';
 
 var map = '';
 var mapOptions = '';
+var dist = 0;
+
+var modeTravel = 'auto'; //auto or meru
+var myRoute = '';
 
 
 
@@ -73,12 +77,15 @@ function initializeMap() {
     google.maps.event.addListener(end_autocomplete, 'place_changed', function() {
     	changeMap();}
     	); 
+    document.getElementById("auto").addEventListener("click", function() {
+    	reCalc("auto");
+    	});
+	document.getElementById("meru").addEventListener("click", function() {
+    	reCalc("meru");
+    	});
 };
 
 function changeMap() {
-	//document.getElementById('location').value = "";
-	//x.setAttribute("value","");
-	
 	start_place = start_autocomplete.getPlace();
 	end_place = end_autocomplete.getPlace();
 	start_lat = start_place.geometry.location.lat();
@@ -102,11 +109,6 @@ function changeMap() {
     var directionDisplay;
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
-    //start_autocomplete.set('place',void(0));
-    //end_autocomplete.set('place',void(0));
-
-	//var request = {origin:start_latlng,destination:end_latlng,travelMode:google.maps.TravelMode.DRIVING  };
-    //directionsService.route(request, function(response, status) {
  
 	var request = {
     	origin:start_latlng,
@@ -116,45 +118,49 @@ function changeMap() {
   	directionsService.route(request, function(result, status) {
     	if (status == google.maps.DirectionsStatus.OK) {
       		directionsDisplay.setDirections(result);
-      		var myRoute = result.routes[0].legs[0];
-      		logError('hi'+ myRoute.distance.value/1000);
-   			var resultDist = document.getElementById("resultDist");
-			resultDist.innerHTML = "Distance: " + myRoute.distance.text;
-			var resultFare = document.getElementById("resultFare");
-			resultFare.innerHTML = calcFare(myRoute.distance.value);
+      		myRoute = result.routes[0].legs[0];
+  			dist = myRoute.distance.value/1000;
+      		updateFare();
 			
     	}
   	});
 
- 
- /*
-    if (status == google.maps.DirectionsStatus.OK)
-    
-    {
-        directionsDisplay.setDirections(response);
-    	logError("Yes");;
-        //computeTotalDistance(directionsDisplay.directions);
-    }
-    else 
-    {
-    	logError("NO");
-	}*/
-    	
-    
-	
 }
 
+function updateFare () {
+	logError('hi'+ myRoute.distance.value/1000);
+   	var resultDist = document.getElementById("resultDist");
+	resultDist.innerHTML = "Distance: " + myRoute.distance.text;
+	var resultFare = document.getElementById("resultFare");
+	resultFare.innerHTML = calcFare();
+}
 function logError(msg) {
-    var s = document.getElementById("debug");
-    s.value += msg;
+    //var s = document.getElementById("debug");
+    //s.value += msg;
+}
+function reCalc(transport) {
+	document.getElementById(modeTravel).className = "passive";
+	modeTravel = transport;
+	document.getElementById(modeTravel).className = "active";
+	//calcFare();
+	updateFare();
+	logError(transport);
 }
 
-function calcFare(dist){
-	dist = dist/1000; //convert to km
-	if (dist<=1.9) {
-		fare = 25;
+function calcFare(){
+	if (modeTravel == "auto") {
+		fare = calcMatrix(1.9, 25, 13)
 	}
-	else fare = dist*13;
+	if (modeTravel == "meru") {
+		fare = calcMatrix(4, 80, 19.50)
+	}
+	return fare;
+}
+function calcMatrix(minDist, minFare, unitFare){
+	if (dist<=minDist) {
+		fare = minFare;
+	}
+	else fare = dist*unitFare;
 	fare = "Fare: Rs. " + fare;
 	return fare;
 }

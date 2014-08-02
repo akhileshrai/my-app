@@ -38,14 +38,19 @@
                 <p class="event received">Device is Ready</p>
             </div>
           </div>  -->
-          <input type="text" name="Start Location" id="start_loc" value="" placeholder="Starting here"/></input>
-          <input type="text" name="End Location" id="end_loc" value="" placeholder="Ending here"/></input>
-          <div class="resultsLeft">
-          <p class="results" id="resultDist">Distance: </p>
-          <p class="results" id="resultFare">Fare: Rs.</p>
+          <div class="header-holder">
+       	  	<div class="resultsLeft">
+          		<input type="text" name="Start Location" id="start_loc" class="input" value="" placeholder="Starting here"/></input>
+          		<input type="text" name="End Location" id="end_loc" class="input" value="" placeholder="Ending here"/></input>
+          		<p class="results" id="resultDist">Distance: </p>
+          		<p class="results" id="resultFare">Fare: Rs.</p>
+          	</div>
+          	<div class="resultsRight">
+          		<img class="active" id="auto" src="img/tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg">
+          		<img class="passive" id="meru" src="img/21636_487859671273442_753272989_n.jpg">
+          	</div>
+            <!--<textarea id="debug"></textarea>-->
           </div>
-          <p class="results" id="resultFare">Fare: Rs.</p>
-          <textarea id="debug"></textarea>
           <div id="map"></div>
        
         <script type="text/javascript" src="cordova.js"></script>
