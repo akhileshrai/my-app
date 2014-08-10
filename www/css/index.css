@@ -123,7 +123,21 @@ h1 {
 	
 }
 .resultsRight {
+	float:right;
+}
+.resultDist {
+	font-size:14px;
+	color:#226622;
+}
+#resultFare {
+	font-size:14px;
+	font-weight:bold;
+	color:#226622;
+}
+#resultDist {
 	float:left;
+	color:#226622;
+	font-weight:bold;
 }
 
 input {

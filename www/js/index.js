@@ -28,6 +28,14 @@ var mapOptions = '';
 var dist = 0;
 
 var modeTravel = 'auto'; //auto or meru
+
+var options = [
+    {"Mode": "Auto", "Option": "Day", "rate": [1.9, 25, 13]},
+    {"Mode": "Auto", "Option": "Day", "rate": [1.9, 25, 13]},
+    {"Mode": "Meru", "Option": "Day", "rate": [4, 80, 19.50]},
+    {"Mode": "Meru", "Option": "Day", "rate": [4, 80, 19.50]}
+];
+
 var myRoute = '';
 
 
@@ -130,7 +138,7 @@ function changeMap() {
 function updateFare () {
 	logError('hi'+ myRoute.distance.value/1000);
    	var resultDist = document.getElementById("resultDist");
-	resultDist.innerHTML = "Distance: " + myRoute.distance.text;
+	resultDist.innerHTML = myRoute.distance.text;
 	var resultFare = document.getElementById("resultFare");
 	resultFare.innerHTML = calcFare();
 }
@@ -148,6 +156,12 @@ function reCalc(transport) {
 }
 
 function calcFare(){
+	console.log(options);
+	fares = [];
+	for (mode in options)
+	{
+		console.log(mode);
+	} 
 	if (modeTravel == "auto") {
 		fare = calcMatrix(1.9, 25, 13)
 	}
@@ -160,8 +174,7 @@ function calcMatrix(minDist, minFare, unitFare){
 	if (dist<=minDist) {
 		fare = minFare;
 	}
-	else fare = dist*unitFare;
-	fare = "Fare: Rs. " + fare;
+	else fare = Math.ceil(dist*unitFare);
 	return fare;
 }
 
