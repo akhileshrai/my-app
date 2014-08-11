@@ -30,10 +30,14 @@ var dist = 0;
 var modeTravel = 'auto'; //auto or meru
 
 var options = [
-    {"Mode": "Auto", "Option": "Day", "rate": [1.9, 25, 13]},
-    {"Mode": "Auto", "Option": "Day", "rate": [1.9, 25, 13]},
-    {"Mode": "Meru", "Option": "Day", "rate": [4, 80, 19.50]},
-    {"Mode": "Meru", "Option": "Day", "rate": [4, 80, 19.50]}
+    {"Mode": "auto", "Option": "Day", "rate": [1.9, 25, 13, 1]},
+    {"Mode": "auto", "Option": "Night", "rate": [1.9, 25, 13, 1.5]},
+    {"Mode": "meru", "Option": "Day", "rate": [4, 80, 19.50, 1]},
+    {"Mode": "meru", "Option": "Night", "rate": [4, 88, 21.45, 1]},
+    {"Mode": "MegaCabs", "Option": "Day", "rate": [4, 80, 19.50,1]},
+    {"Mode": "MegaCabs", "Option": "Night", "rate": [4, 80, 19.50, 1.1]},
+    {"Mode": "Ola", "Option": "Day", "rate": [7.14, 150, 21, 1]},
+    {"Mode": "Ola", "Option": "Night", "rate": [7.14, 150, 21, 1]}
 ];
 
 var myRoute = '';
@@ -41,8 +45,11 @@ var myRoute = '';
 
 
 var app = {
+	
+
     // Application Constructor
     initialize: function() {
+    	console.log("app initialize called");
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -50,7 +57,12 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+	    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+	        document.addEventListener("deviceready", this.onDeviceReady, false);
+	    } else {
+	        this.onDeviceReady();
+	    }
+	    //document.addEventListener('click', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
@@ -62,11 +74,12 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         initializeMap();
-        console.log('Received Event: ' + id);
+        console.log('Received Event: ');
     }
 };
 
 function initializeMap() {
+	console.log("initialize called");
 
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 10000, timeout: 10000, enableHighAccuracy: true });  
 	start_autocomplete = new google.maps.places.Autocomplete(
@@ -87,15 +100,23 @@ function initializeMap() {
     	); 
     document.getElementById("auto").addEventListener("click", function() {
     	reCalc("auto");
-    	});
+    	}, false);
 	document.getElementById("meru").addEventListener("click", function() {
     	reCalc("meru");
-    	});
+    	},false);
+    document.getElementById("MegaCabs").addEventListener("click", function() {
+    	reCalc("MegaCabs");
+    	},false);
+   	document.getElementById("Ola").addEventListener("click", function() {
+    	reCalc("Ola");
+    	},false);
 };
 
 function changeMap() {
+	console.log("changemap called");
 	start_place = start_autocomplete.getPlace();
 	end_place = end_autocomplete.getPlace();
+	
 	start_lat = start_place.geometry.location.lat();
 	start_lng = start_place.geometry.location.lng();
 	end_lat = end_place.geometry.location.lat();
@@ -136,20 +157,22 @@ function changeMap() {
 }
 
 function updateFare () {
-	logError('hi'+ myRoute.distance.value/1000);
    	var resultDist = document.getElementById("resultDist");
 	resultDist.innerHTML = myRoute.distance.text;
 	var resultFare = document.getElementById("resultFare");
 	resultFare.innerHTML = calcFare();
+	var resultMode = document.getElementById("resultMode");
+	resultMode.innerHTML = modeTravel;
+
 }
 function logError(msg) {
     //var s = document.getElementById("debug");
     //s.value += msg;
 }
 function reCalc(transport) {
-	document.getElementById(modeTravel).className = "passive";
+	document.getElementById(modeTravel).className = "icon passive";
 	modeTravel = transport;
-	document.getElementById(modeTravel).className = "active";
+	document.getElementById(modeTravel).className = "icon active";
 	//calcFare();
 	updateFare();
 	logError(transport);
@@ -158,23 +181,31 @@ function reCalc(transport) {
 function calcFare(){
 	console.log(options);
 	fares = [];
+	fare = [];
+	farecolumns = '<tr>';
+	farerows = '<tr>';
+	//firstrow = 1;
 	for (mode in options)
-	{
-		console.log(mode);
-	} 
-	if (modeTravel == "auto") {
-		fare = calcMatrix(1.9, 25, 13)
+	{		
+		if (options[mode].Mode == modeTravel)
+		{
+			fare = calcMatrix(options[mode].rate[0], options[mode].rate[1], options[mode].rate[2],options[mode].rate[3]);
+			//if (firstrow) {
+			farecolumns = farecolumns +'<th>'+options[mode].Option+'</th>';
+			//	firstrow = 0;
+			//}
+			farerows = farerows +'<td>'+fare+'</td>';
+		}	
 	}
-	if (modeTravel == "meru") {
-		fare = calcMatrix(4, 80, 19.50)
-	}
-	return fare;
+	farehtml = '<table class="fare-table">'+farecolumns +'</tr>'+farerows+'</tr></table>';
+	
+	return farehtml;
 }
-function calcMatrix(minDist, minFare, unitFare){
+function calcMatrix(minDist, minFare, unitFare, fareMultiplier){
 	if (dist<=minDist) {
-		fare = minFare;
+		fare = minFare*fareMultiplier;
 	}
-	else fare = Math.ceil(dist*unitFare);
+	else fare = Math.ceil(dist*unitFare*fareMultiplier);
 	return fare;
 }
 

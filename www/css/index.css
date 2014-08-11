@@ -115,21 +115,48 @@ h1 {
 }
 #map {
 	width: 100%;
-    height: 400px;
+    height: 300px;
+}
+.header-holder {
+	height:70px;
+	
+}
+.icon-holders {
+	float: left;
+    padding: 4px;
+    width: 112px;
+}
+
+.resultsMatrix {
+	margin:0px;
+	padding:2px;
 }
 .resultsLeft {
 	float:left;
-	width:70%;
+	width:60%;
 	
 }
 .resultsRight {
-	float:right;
+	float:left;
 }
 .resultDist {
-	font-size:14px;
+	font-size:16px;
 	color:#226622;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.results {
+	float:left;
+}
+#fareTitle{
+	text-transform: none;
+}
+#fareMode{
+	
 }
 #resultFare {
+	margin:0px;
+	adding:2px;
 	font-size:14px;
 	font-weight:bold;
 	color:#226622;
@@ -138,6 +165,15 @@ h1 {
 	float:left;
 	color:#226622;
 	font-weight:bold;
+	font-size:16px;
+	font-weight:bold;
+	color:#226622;
+	padding-left:5px;
+	margin:0;
+}
+#distDisp {
+	margin:0;
+	padding-top:8px;
 }
 
 input {
@@ -146,13 +182,20 @@ input {
 .active {
 	outline:solid #262;
 	margin:2x;
-	/*float:left;*/
-	z-index: 1;
-	
 }
 .passive {
 	outline:solid #fff;
 	margin:2x;
-	/*float:left;*/
-	z-index: 0;
+}
+img {
+	margin:2px;
+}
+
+table,th,td {
+	border:2px solid #226622;
+	border-collapse: collapse;
+}
+
+th,td {
+	padding:5px;
 }

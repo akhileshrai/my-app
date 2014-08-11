@@ -45,6 +45,8 @@ C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\spec.html
 C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\css\index.css \
 C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\img\21636_487859671273442_753272989_n.jpg \
 C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\img\logo.png \
+C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\img\megacabs.png \
+C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\img\Ola.jpg \
 C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\img\tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg \
 C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\js\index.js \
 C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\assets\www\res\icon \
