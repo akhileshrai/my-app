@@ -114,9 +114,20 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 #map {
-	width: 100%;
+	display: inline-block;;
+	width: 90%;
     height: 300px;
 }
+.map-holder {
+	display: block;
+	margin-top: 2px;
+}
+.map-border {
+	display: inline-block;;
+	padding:4px;
+	width:2px;
+}
+			
 .header-holder {
 	height:70px;
 	
