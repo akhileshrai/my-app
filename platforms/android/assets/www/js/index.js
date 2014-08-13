@@ -27,17 +27,19 @@ var map = '';
 var mapOptions = '';
 var dist = 0;
 
-var modeTravel = 'auto'; //auto or meru
+var modeTravel = 'Auto'; //auto or meru
 
 var options = [
-    {"Mode": "auto", "Option": "Day", "rate": [1.9, 25, 13, 1]},
-    {"Mode": "auto", "Option": "Night", "rate": [1.9, 25, 13, 1.5]},
-    {"Mode": "meru", "Option": "Day", "rate": [4, 80, 19.50, 1]},
-    {"Mode": "meru", "Option": "Night", "rate": [4, 88, 21.45, 1]},
-    {"Mode": "MegaCabs", "Option": "Day", "rate": [4, 80, 19.50,1]},
-    {"Mode": "MegaCabs", "Option": "Night", "rate": [4, 80, 19.50, 1.1]},
-    {"Mode": "Ola", "Option": "Day", "rate": [7.14, 150, 21, 1]},
-    {"Mode": "Ola", "Option": "Night", "rate": [7.14, 150, 21, 1]}
+    {"Mode": "Auto", "Option": "Day", "rate": [0, 1.9, 25, 13, 1], "Timing":['0500','2300']}, //Fare array = baseFare, least distance, least fare, per km rate, multiplier
+    {"Mode": "Auto", "Option": "Night", "rate": [0, 1.9, 25, 13, 1.5], "Timing":['2300', '0500']},
+    {"Mode": "Meru", "Option": "Day", "rate": [0, 4, 80, 19.50, 1],"Timing":['0500','0000'], "Convenience":[40,60], "Comment":["Rs. 40 within 35 minutes, Rs. 60 within 24h", "No charge for the first 20min"]},
+    {"Mode": "Meru", "Option": "Night", "rate": [0, 4, 88, 21.45, 1],"Timing":['0000', '0500'], "Convenience":[40,60], "Comment":["Rs. 40 within 35 minutes, Rs. 60 within 24h", "No charge for the first 20min"]},
+    {"Mode": "MegaCabs", "Option": "Day", "rate": [0, 4, 80, 19.50,1], "Timing":['0600','0000'], "Convenience":[35], "Comment":"Flat Rs. 35 per phone booking"},
+    {"Mode": "MegaCabs", "Option": "Night", "rate": [0, 4, 80, 19.50, 1.1],"Timing":['0000','0600'],"Convenience":[35], "Comment":"Flat Rs. 35 per phonebooking"},
+    {"Mode": "Ola", "Option": "Day/Night", "rate": [0, 7.14, 150, 21, 1], "Comment":"No Night Fees or Phone Booking Charges."},
+    {"Mode": "Ola", "Option": "Luxury", "rate": [0, 5, 200, 20, 1], "Comment":"No Night Fees or Phone Booking Charges."},
+    {"Mode": "Uber", "Option": "Uber Black", "rate": [80, 4.4, 200, 18, 1], "Comment":"App only bookings."},
+    {"Mode": "Uber", "Option": "Uber X", "rate": [50, 5, 125, 15, 1], "Comment":"App only bookings."}
 ];
 
 var myRoute = '';
@@ -98,17 +100,20 @@ function initializeMap() {
     google.maps.event.addListener(end_autocomplete, 'place_changed', function() {
     	changeMap();}
     	); 
-    document.getElementById("auto").addEventListener("click", function() {
-    	reCalc("auto");
+    document.getElementById("Auto").addEventListener("click", function() {
+    	reCalc("Auto");
     	}, false);
-	document.getElementById("meru").addEventListener("click", function() {
-    	reCalc("meru");
+	document.getElementById("Meru").addEventListener("click", function() {
+    	reCalc("Meru");
     	},false);
     document.getElementById("MegaCabs").addEventListener("click", function() {
     	reCalc("MegaCabs");
     	},false);
    	document.getElementById("Ola").addEventListener("click", function() {
     	reCalc("Ola");
+    	},false);
+    document.getElementById("Uber").addEventListener("click", function() {
+    	reCalc("Uber");
     	},false);
 };
 
@@ -162,7 +167,7 @@ function updateFare () {
 	var resultFare = document.getElementById("resultFare");
 	resultFare.innerHTML = calcFare();
 	var resultMode = document.getElementById("resultMode");
-	resultMode.innerHTML = modeTravel;
+	resultMode.innerHTML = 'Fare (in Rs.) for '+modeTravel;
 
 }
 function logError(msg) {
@@ -189,7 +194,7 @@ function calcFare(){
 	{		
 		if (options[mode].Mode == modeTravel)
 		{
-			fare = calcMatrix(options[mode].rate[0], options[mode].rate[1], options[mode].rate[2],options[mode].rate[3]);
+			fare = calcMatrix(options[mode].rate[0], options[mode].rate[1], options[mode].rate[2],options[mode].rate[3], options[mode].rate[4]);
 			//if (firstrow) {
 			farecolumns = farecolumns +'<th>'+options[mode].Option+'</th>';
 			//	firstrow = 0;
@@ -201,11 +206,17 @@ function calcFare(){
 	
 	return farehtml;
 }
-function calcMatrix(minDist, minFare, unitFare, fareMultiplier){
-	if (dist<=minDist) {
+function calcMatrix(baseFare, minDist, minFare, unitFare, fareMultiplier){
+	/*if (dist<=minDist) {
 		fare = minFare*fareMultiplier;
 	}
-	else fare = Math.ceil(dist*unitFare*fareMultiplier);
+	else fare = Math.ceil(dist*unitFare*fareMultiplier);*/
+	fare = baseFare+dist*unitFare;
+	if (fare<=minFare) {
+		fare = minFare;
+	}
+	fare = Math.ceil(fare*fareMultiplier);
+	
 	return fare;
 }
 

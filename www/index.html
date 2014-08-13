@@ -27,7 +27,7 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>RateMyRide</title>
     </head>
     <body><!--
         <div class="app">
@@ -38,6 +38,10 @@
                 <p class="event received">Device is Ready</p>
             </div>
           </div>  -->
+      <div class="title" id="appname">RateMyRide</div>
+      <div class="sub-page active-page">Pick</div>
+      <div class="sub-page">Rate</div>
+      <div class="sub-page">Reco</div>
 	  <div class="header-holder">
 	  	<div class="resultsLeft">
 	      	<div class="locations">
@@ -52,20 +56,19 @@
 	    <!--<textarea id="debug"></textarea>-->
 	  </div>
 		<div class = "icon-holders">
-			<img class="icons active" id="auto" src="img/tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg">
-			<img class="icons passive" id="meru" src="img/21636_487859671273442_753272989_n.jpg">
+			<img class="icons active" id="Auto" src="img/tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg">
+			<img class="icons passive" id="Meru" src="img/21636_487859671273442_753272989_n.jpg">
 			<img class="icons passive" id="MegaCabs" src="img/megacabs.png">
 			<img class="icons passive" id="Ola" src="img/Ola.jpg">
+			<img class="icons passive" id="Uber" src="img/Uber.jpg">
 		</div>
 		<div class = "fare-results">
-			<div class="resultsMatrix" id="fareTitle"><div>Fare (in Rs.)</div><div class ="resultsMatrix" id="resultMode"></div></div>
+			<div class ="resultsMatrix" id="resultMode"></div></div>
 			<p class="resultsMatrix" id="resultFare"></p>
 		</div>
 		
 		<div class="map-holder">
-			<div class="map-border"></div>
 			<div id="map"></div>
-			<div class="map-border"></div>
 		</div>
         
         
