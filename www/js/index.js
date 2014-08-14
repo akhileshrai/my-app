@@ -22,6 +22,8 @@ var start_place = '';
 var end_place = '';
 var end_lat = '';
 var end_lng = '';
+var bang_lat = 12.971599;
+var bang_lng = 	77.594563;
 
 var map = '';
 var mapOptions = '';
@@ -76,6 +78,13 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         initializeMap();
+       	mapOptions = {
+			center: new google.maps.LatLng(bang_lat, bang_lng),
+			zoom: 10,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+	
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
         console.log('Received Event: ');
     }
 };
@@ -126,6 +135,9 @@ function changeMap() {
 	start_lng = start_place.geometry.location.lng();
 	end_lat = end_place.geometry.location.lat();
 	end_lng = end_place.geometry.location.lng();
+	
+	calc_dist(start_lat,start_lng);
+	
 	//var end_latlng = (end_lat, end_lng);
 	var start_latlng = new google.maps.LatLng(start_lat, start_lng);
 	var end_latlng = new google.maps.LatLng(end_lat, end_lng);
@@ -161,13 +173,27 @@ function changeMap() {
 
 }
 
+function calc_dist (point_lat, point_lng){
+  	var R = 6371; // Radius of the earth in km
+  	var dLat = (point_lat-bang_lat) * Math.PI / 180;  // deg2rad below
+  	var dLon = (point_lng - bang_lng) * Math.PI / 180;
+	var a = 
+	     0.5 - Math.cos(dLat)/2 + 
+	     Math.cos(bang_lat * Math.PI / 180) * Math.cos(point_lat * Math.PI / 180) * 
+	     (1 - Math.cos(dLon))/2;
+	var d = R * 2 * Math.asin(Math.sqrt(a));
+	console.log("HI");
+	console.log(point_lat, bang_lat);
+	console.log(d);
+}
+
 function updateFare () {
    	var resultDist = document.getElementById("resultDist");
 	resultDist.innerHTML = myRoute.distance.text;
 	var resultFare = document.getElementById("resultFare");
 	resultFare.innerHTML = calcFare();
-	var resultMode = document.getElementById("resultMode");
-	resultMode.innerHTML = 'Fare (in Rs.) for '+modeTravel;
+	//var resultMode = document.getElementById("resultMode");
+	//resultMode.innerHTML = 'Fare (in Rs.) for '+modeTravel;
 
 }
 function logError(msg) {
@@ -175,16 +201,16 @@ function logError(msg) {
     //s.value += msg;
 }
 function reCalc(transport) {
-	document.getElementById(modeTravel).className = "icon passive";
+	document.getElementById(modeTravel).className = "iconimg passive";
 	modeTravel = transport;
-	document.getElementById(modeTravel).className = "icon active";
+	document.getElementById(modeTravel).className = "iconimg  active";
 	//calcFare();
 	updateFare();
 	logError(transport);
 }
 
 function calcFare(){
-	console.log(options);
+	//console.log(options);
 	fares = [];
 	fare = [];
 	farecolumns = '<tr>';

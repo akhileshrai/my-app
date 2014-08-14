@@ -127,12 +127,17 @@ h1 {
 	display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding: 10px 0;
-    width:30%;
+    width:32%;
+    float:left;
     text-align:center;
     border:#226622 1px solid;
     border-collapse: collapse;
+}
+.input-loc {
+	width:95%;
+	padding-left: 0.2em;
 }
 .active-page {
 	background:#4B946A
@@ -151,13 +156,22 @@ h1 {
 }
 	
 .header-holder {
-	height:70px;
-	
+	height:10em;
 }
 .icon-holders {
-	float: left;
-    padding: 4px;
-    width: 112px;
+	padding: 0;
+    /*width: 112px;*/
+   	height: 5em;
+   	display: block;
+   	text-align:center;
+}
+img .iconimg{
+	max-width:50px;
+}
+.icons {
+    display: inline-block;
+    text-align: center;
+    width: 19%;	
 }
 
 .resultsMatrix {
@@ -169,14 +183,14 @@ h1 {
 	width:60%;
 	
 }
+.locations {
+	padding-left: 10px;
+}
 .resultsRight {
 	float:left;
-}
-.resultDist {
-	font-size:16px;
-	color:#226622;
-    font-weight: bold;
-    padding-left: 10px;
+	width: 40%;
+	margin:auto;
+	height:4em;
 }
 .results {
 	float:left;
@@ -187,22 +201,29 @@ h1 {
 #fareMode{
 	
 }
+.fare-results {
+	padding:0 8px;
+	height: 6em;
+}
 #resultFare {
 	margin:0px;
-	adding:2px;
 	font-size:14px;
 	font-weight:bold;
 	color:#226622;
 }
+.modecomments {
+	display:inline-block;
+}
 #resultDist {
-	float:left;
+	text-align:center;
 	color:#226622;
 	font-weight:bold;
-	font-size:16px;
-	font-weight:bold;
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-top: 0.3em;
+	width:100%;
 	color:#226622;
 	padding-left:5px;
-	margin:0;
 }
 #distDisp {
 	margin:0;
@@ -219,9 +240,6 @@ input {
 .passive {
 	outline:solid #fff;
 	margin:2x;
-}
-img {
-	margin:2px;
 }
 
 table,th,td {

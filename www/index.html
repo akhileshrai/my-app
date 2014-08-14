@@ -45,26 +45,25 @@
 	  <div class="header-holder">
 	  	<div class="resultsLeft">
 	      	<div class="locations">
-	      		<input type="text" name="Start Location" id="start_loc" class="input" value="" placeholder="Starting here"/></input>
-	      		<input type="text" name="End Location" id="end_loc" class="input" value="" placeholder="Ending here"/></input>
+	      		<input type="text" name="Start Location" id="start_loc" class="input-loc" value="" placeholder="Starting here"/></input>
+	      		<input type="text" name="End Location" id="end_loc" class="input-loc" value="" placeholder="Ending here"/></input>
 	      	</div>
 	    </div>
 	  	<div class="resultsRight">
-	  		<p class="results" id="distDisp">Distance: </p>
-	  		<p class="results" id="resultDist"></p>
+	  		<div class="results" id="resultDist"></div>
 	  	</div>
 	    <!--<textarea id="debug"></textarea>-->
 	  </div>
 		<div class = "icon-holders">
-			<img class="icons active" id="Auto" src="img/tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg">
-			<img class="icons passive" id="Meru" src="img/21636_487859671273442_753272989_n.jpg">
-			<img class="icons passive" id="MegaCabs" src="img/megacabs.png">
-			<img class="icons passive" id="Ola" src="img/Ola.jpg">
-			<img class="icons passive" id="Uber" src="img/Uber.jpg">
+			<div class="icons"><img class="iconimg active" id="Auto" src="img/tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg"></div>
+			<div class="icons"><img class="iconimg passive" id="Meru" src="img/21636_487859671273442_753272989_n.jpg"></div>
+			<div class="icons"><img class="iconimg passive" id="MegaCabs" src="img/megacabs.png"></div>
+			<div class="icons"><img class="iconimg passive" id="Ola" src="img/Ola.jpg"></div>
+			<div class="icons"><img class="iconimg passive" id="Uber" src="img/Uber.jpg"></div>
 		</div>
 		<div class = "fare-results">
-			<div class ="resultsMatrix" id="resultMode"></div></div>
-			<p class="resultsMatrix" id="resultFare"></p>
+			<div class="resultsMatrix" id="resultFare"></div>
+			<div class="modecomments"></div>
 		</div>
 		
 		<div class="map-holder">
