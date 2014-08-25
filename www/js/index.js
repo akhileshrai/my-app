@@ -16,36 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var start_lat = '';
-var start_lng = '';
-var start_place = '';
-var end_place = '';
-var end_lat = '';
-var end_lng = '';
-var bang_lat = 12.971599;
-var bang_lng = 	77.594563;
-
-var map = '';
-var mapOptions = '';
-var dist = 0;
-
-var modeTravel = 'Auto'; //auto or meru
-
-var options = [
-    {"Mode": "Auto", "Option": "Day", "rate": [0, 1.9, 25, 13, 1], "Timing":['0500','2300']}, //Fare array = baseFare, least distance, least fare, per km rate, multiplier
-    {"Mode": "Auto", "Option": "Night", "rate": [0, 1.9, 25, 13, 1.5], "Timing":['2300', '0500']},
-    {"Mode": "Meru", "Option": "Day", "rate": [0, 4, 80, 19.50, 1],"Timing":['0500','0000'], "Convenience":[40,60], "Comment":["Rs. 40 within 35 minutes, Rs. 60 within 24h", "No charge for the first 20min"]},
-    {"Mode": "Meru", "Option": "Night", "rate": [0, 4, 88, 21.45, 1],"Timing":['0000', '0500'], "Convenience":[40,60], "Comment":["Rs. 40 within 35 minutes, Rs. 60 within 24h", "No charge for the first 20min"]},
-    {"Mode": "MegaCabs", "Option": "Day", "rate": [0, 4, 80, 19.50,1], "Timing":['0600','0000'], "Convenience":[35], "Comment":"Flat Rs. 35 per phone booking"},
-    {"Mode": "MegaCabs", "Option": "Night", "rate": [0, 4, 80, 19.50, 1.1],"Timing":['0000','0600'],"Convenience":[35], "Comment":"Flat Rs. 35 per phonebooking"},
-    {"Mode": "Ola", "Option": "Day/Night", "rate": [0, 7.14, 150, 21, 1], "Comment":"No Night Fees or Phone Booking Charges."},
-    {"Mode": "Ola", "Option": "Luxury", "rate": [0, 5, 200, 20, 1], "Comment":"No Night Fees or Phone Booking Charges."},
-    {"Mode": "Uber", "Option": "Uber Black", "rate": [80, 4.4, 200, 18, 1], "Comment":"App only bookings."},
-    {"Mode": "Uber", "Option": "Uber X", "rate": [50, 5, 125, 15, 1], "Comment":"App only bookings."}
-];
-
-var myRoute = '';
-
 
 
 var app = {
@@ -77,20 +47,27 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        initializeMap();
-       	mapOptions = {
-			center: new google.maps.LatLng(bang_lat, bang_lng),
-			zoom: 10,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
+       	try {
+		        initializeMap();
+	       		mapOptions = {
+					center: new google.maps.LatLng(bang_lat, bang_lng),
+					zoom: 10,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+		        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+		}
+		catch (error) {
+			noNetwork("No network!");
+		}
 	
-        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        
         console.log('Received Event: ');
     }
 };
 
 function initializeMap() {
-	console.log("initialize called");
+	//console.log("initialize called");
 
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 10000, timeout: 10000, enableHighAccuracy: true });  
 	start_autocomplete = new google.maps.places.Autocomplete(
@@ -109,22 +86,55 @@ function initializeMap() {
     google.maps.event.addListener(end_autocomplete, 'place_changed', function() {
     	changeMap();}
     	); 
-    document.getElementById("Auto").addEventListener("click", function() {
-    	reCalc("Auto");
-    	}, false);
-	document.getElementById("Meru").addEventListener("click", function() {
-    	reCalc("Meru");
-    	},false);
-    document.getElementById("MegaCabs").addEventListener("click", function() {
-    	reCalc("MegaCabs");
-    	},false);
-   	document.getElementById("Ola").addEventListener("click", function() {
-    	reCalc("Ola");
-    	},false);
-    document.getElementById("Uber").addEventListener("click", function() {
-    	reCalc("Uber");
-    	},false);
+	//console.Log(mode.Mode);
+    for (mode in options)
+	{	
+		(function(mode){
+			//console.log(options[mode].Mode);
+			document.getElementById(options[mode].Mode).addEventListener("click", function() {
+	    	reCalc(options[mode].Mode);
+	    	}, false);
+	    })(mode);
+	}
+	
+	for (var i=1;i<4;i++){
+		(function(i){
+       		var pageId = 'page-'+i+'-title';
+    		console.log(pageId);
+			document.getElementById(pageId).addEventListener("click", function() {
+	    	changePage(i);
+	    	}, false);
+    	})(i);
+	}
+	
+	    
+    // document.getElementById("Auto").addEventListener("click", function() {
+    	// reCalc("Auto");
+    	// }, false);
+	// document.getElementById("Meru").addEventListener("click", function() {
+    	// reCalc("Meru");
+    	// },false);
+    // document.getElementById("MegaCabs").addEventListener("click", function() {
+    	// reCalc("MegaCabs");
+    	// },false);
+   	// document.getElementById("Ola").addEventListener("click", function() {
+    	// reCalc("Ola");
+    	// },false);
+    // document.getElementById("Uber").addEventListener("click", function() {
+    	// reCalc("Uber");
+    	// },false);
 };
+
+function changePage (pageNum) {
+//	console.log('hi'+pageNum);
+	document.getElementById('page-'+curPage).className = "sub-page-content invisible";
+	document.getElementById('page-'+curPage+'-title').className = "sub-page";
+	curPage = pageNum;
+	document.getElementById('page-'+pageNum).className = "sub-page-content visible";
+	document.getElementById('page-'+curPage+'-title').className = "sub-page active-page";	
+	
+	console.log(options);
+}
 
 function changeMap() {
 	console.log("changemap called");
@@ -173,78 +183,6 @@ function changeMap() {
 
 }
 
-function calc_dist (point_lat, point_lng){
-  	var R = 6371; // Radius of the earth in km
-  	var dLat = (point_lat-bang_lat) * Math.PI / 180;  // deg2rad below
-  	var dLon = (point_lng - bang_lng) * Math.PI / 180;
-	var a = 
-	     0.5 - Math.cos(dLat)/2 + 
-	     Math.cos(bang_lat * Math.PI / 180) * Math.cos(point_lat * Math.PI / 180) * 
-	     (1 - Math.cos(dLon))/2;
-	var d = R * 2 * Math.asin(Math.sqrt(a));
-	console.log("HI");
-	console.log(point_lat, bang_lat);
-	console.log(d);
-}
-
-function updateFare () {
-   	var resultDist = document.getElementById("resultDist");
-	resultDist.innerHTML = myRoute.distance.text;
-	var resultFare = document.getElementById("resultFare");
-	resultFare.innerHTML = calcFare();
-	//var resultMode = document.getElementById("resultMode");
-	//resultMode.innerHTML = 'Fare (in Rs.) for '+modeTravel;
-
-}
-function logError(msg) {
-    //var s = document.getElementById("debug");
-    //s.value += msg;
-}
-function reCalc(transport) {
-	document.getElementById(modeTravel).className = "iconimg passive";
-	modeTravel = transport;
-	document.getElementById(modeTravel).className = "iconimg  active";
-	//calcFare();
-	updateFare();
-	logError(transport);
-}
-
-function calcFare(){
-	//console.log(options);
-	fares = [];
-	fare = [];
-	farecolumns = '<tr>';
-	farerows = '<tr>';
-	//firstrow = 1;
-	for (mode in options)
-	{		
-		if (options[mode].Mode == modeTravel)
-		{
-			fare = calcMatrix(options[mode].rate[0], options[mode].rate[1], options[mode].rate[2],options[mode].rate[3], options[mode].rate[4]);
-			//if (firstrow) {
-			farecolumns = farecolumns +'<th>'+options[mode].Option+'</th>';
-			//	firstrow = 0;
-			//}
-			farerows = farerows +'<td>'+fare+'</td>';
-		}	
-	}
-	farehtml = '<table class="fare-table">'+farecolumns +'</tr>'+farerows+'</tr></table>';
-	
-	return farehtml;
-}
-function calcMatrix(baseFare, minDist, minFare, unitFare, fareMultiplier){
-	/*if (dist<=minDist) {
-		fare = minFare*fareMultiplier;
-	}
-	else fare = Math.ceil(dist*unitFare*fareMultiplier);*/
-	fare = baseFare+dist*unitFare;
-	if (fare<=minFare) {
-		fare = minFare;
-	}
-	fare = Math.ceil(fare*fareMultiplier);
-	
-	return fare;
-}
 
 var onSuccess = function(position) {
     alert('Latitude: '          + position.coords.latitude          + '\n' +
@@ -270,4 +208,8 @@ var onSuccess = function(position) {
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
+}
+
+function noNetwork(error) {
+    console.log('No Network!');
 }

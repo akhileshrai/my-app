@@ -1,0 +1,10 @@
+    <div class="has-header has-subheader">
+        <ul>
+            <li ng-repeat="employee in fares" type="item-text-wrap" class="item-avatar">
+                <a href="#/employees/{{employee.id}}">hi</a>
+                <img src="pics/{{employee.pic}}"/>
+                {{employee.firstName}} {{employee.lastName}}
+                <p>{{employee.title}}</p>
+            </li>
+        </ul>
+    </div>

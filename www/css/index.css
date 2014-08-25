@@ -113,7 +113,13 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
-
+.main-body {
+	max-width:960px;
+	margin:auto;
+}
+.content {
+	display:inline-block;
+}
 #appname{
 	display: block;
     font-size: 16px;
@@ -134,6 +140,12 @@ h1 {
     text-align:center;
     border:#226622 1px solid;
     border-collapse: collapse;
+}
+.visible {
+	display: block;
+}
+.invisible {
+	display:none;
 }
 .input-loc {
 	width:95%;
