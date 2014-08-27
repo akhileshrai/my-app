@@ -107,33 +107,14 @@ function initializeMap() {
     	})(i);
 	}
 	
-	    
-    // document.getElementById("Auto").addEventListener("click", function() {
-    	// reCalc("Auto");
-    	// }, false);
-	// document.getElementById("Meru").addEventListener("click", function() {
-    	// reCalc("Meru");
-    	// },false);
-    // document.getElementById("MegaCabs").addEventListener("click", function() {
-    	// reCalc("MegaCabs");
-    	// },false);
-   	// document.getElementById("Ola").addEventListener("click", function() {
-    	// reCalc("Ola");
-    	// },false);
-    // document.getElementById("Uber").addEventListener("click", function() {
-    	// reCalc("Uber");
-    	// },false);
 };
 
 function changePage (pageNum) {
-//	console.log('hi'+pageNum);
 	document.getElementById('page-'+curPage).className = "sub-page-content invisible";
 	document.getElementById('page-'+curPage+'-title').className = "sub-page";
 	curPage = pageNum;
 	document.getElementById('page-'+pageNum).className = "sub-page-content visible";
 	document.getElementById('page-'+curPage+'-title').className = "sub-page active-page";	
-	
-	console.log(options);
 }
 
 function changeMap() {

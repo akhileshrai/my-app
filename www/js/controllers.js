@@ -1,5 +1,4 @@
 //var fares='';
-var options = '';
 angular.module('directory.controllers', [])
 
     .controller("MyController", function($scope) {
@@ -16,7 +15,7 @@ angular.module('directory.controllers', [])
         $scope.clearSearch = function () {
             $scope.searchKey = "";
             $scope.fares = Employees.query();
-            options = $scope.fares;
+            //options = $scope.fares;
         };
 
         $scope.search = function () {
@@ -24,60 +23,70 @@ angular.module('directory.controllers', [])
         };
 
         $scope.fares = Employees.query();
-    	options = Employees.query();
+    	//options = Employees.query();
         console.log('updated fares');
-        console.log(options);
         
     })
     
-    .controller('OptionCtrl', function ($scope, Fares) {
-    	
-        $scope.searchKey = "";
-/*
-        $scope.clearSearch = function () {
-            $scope.searchKey = "";
-            $scope.fares = Fares.query();
-            fares = $scope.fares;
-        };
-
-        $scope.search = function () {
-            $scope.fares = Fares.query({name: $scope.searchKey});
-        };
-
-*/
-  		//options = Fares.query();
-
+    .controller('watchCtrl', function ($scope, Fares) {
+    	console.log('watching position');
+		var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+		function onSuccess(position) {
+		    //var element = document.getElementById('geolocation');
+		    element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+		                        'Longitude: ' + position.coords.longitude     + '<br />' +
+		                        '<hr />'      + element.innerHTML;
+		    console.log(position.coords.latitude, position.coords.longitude);
+		}
+		
+		// onError Callback receives a PositionError object
+		//
+		function onError(error) {
+		    alert('code: '    + error.code    + '\n' +
+		          'message: ' + error.message + '\n');
+		}
 
 		
-        $scope.options = Fares.query();
-
-        $scope.modes = {}
-		$scope.returnModes = function (options) 
+		
+    })
+    
+    .controller('OptionCtrl', function ($scope, Fares) {
+	    console.log('optioncctrl' + options);
+	
+		if (options=='') {
+	        options = Fares.query();
+	        $scope.modes = {};
+	        options.$promise.then(function (result) {
+			    $scope.modes = returnModes(result);
+			});
+		}
+		else $scope.modes = returnModes(options);
+        
+		returnModes = function (options) 
 		{
 			var lookup = {};
 			var items = options;
 			var result = [];
 		
 		    
-		    console.log("returnin modes");
 		    	
 			for (item in items) {
 				var name = items[item].Mode;
 				if (name!=null && !(name in lookup)) {
 					lookup[name] = 1;
 					result.push({"Mode":name});
-					console.log('hi');
 				}
 			}
 			console.log(result);
 			
 			//return result;
-			$scope.modes = result;
+			return result;
 		};
 		
 		$scope.myData = {};
         $scope.myData.doClick = function(modeIn) {
-            //reCalc(modeIn);
+            console.log(modeIn);
+            reCalc(modeIn);
             
         };
 

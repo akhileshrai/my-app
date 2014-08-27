@@ -26,11 +26,12 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
         
         <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     	<link href="css/style.css" rel="stylesheet">
-
+        
 	    <!-- ionic/angularjs js 
 	    <script src="lib/ionic/js/ionic.bundle.js"></script>
 	    <script src="lib/ionic/js/angular/angular-resource.min.js"></script>-->
@@ -60,9 +61,9 @@
             </div>
           </div>  -->
       <div class="title" id="appname">RateMyRide</div>
-      <div class="sub-page active-page" id="page-1-title">Pick</div>
-      <div class="sub-page" id="page-2-title">Rate</div>
-      <div class="sub-page" id="page-3-title">Reco</div>
+      <a href="#rate" class="sub-page active-page" id="page-1-title">Pick</a>
+      <a href="#search" class="sub-page" id="page-2-title">Rate</a>
+      <a href="#watch" class="sub-page" id="page-3-title">Reco</a>
       <div class="sub-page-content visible" id="page-1">
 		  <div class="header-holder">
 		  	<div class="resultsLeft">
@@ -76,13 +77,14 @@
 		  	</div>
 		    <!--<textarea id="debug"></textarea>-->
 		  </div>
-			<div class = "icon-holders">
+		    <div ng-view></div>
+			<!--<div class = "icon-holders">
 				<div class="icons"><img class="iconimg active" id="Auto" src="img/tuktuk_1.jpgb14f1b8c-1c43-4eb6-9e9b-ec9af06e2072Small.jpg"></div>
 				<div class="icons"><img class="iconimg passive" id="Meru" src="img/21636_487859671273442_753272989_n.jpg"></div>
 				<div class="icons"><img class="iconimg passive" id="MegaCabs" src="img/megacabs.png"></div>
 				<div class="icons"><img class="iconimg passive" id="Ola" src="img/Ola.jpg"></div>
 				<div class="icons"><img class="iconimg passive" id="Uber" src="img/Uber.jpg"></div>
-			</div>
+			</div>-->
 			<div class = "fare-results">
 				<div class="resultsMatrix" id="resultFare"></div>
 				<div class="modecomments"></div>
@@ -99,6 +101,7 @@
 		</div>
 		<div class="sub-page-content invisible" id="page-3">
 			<div class="content">We are Page3!</div> 
+			<div ng-view></div>
 		</div>
         
 

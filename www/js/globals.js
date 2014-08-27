@@ -10,6 +10,8 @@ var bang_lng = 	77.594563;
 var map = '';
 var mapOptions = '';
 var dist = 0;
+var options = '';
+
 
 var modeTravel = 'Auto'; //auto or meru
 var curPage=1;

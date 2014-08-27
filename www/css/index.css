@@ -141,6 +141,12 @@ h1 {
     border:#226622 1px solid;
     border-collapse: collapse;
 }
+
+a:link,a:visited,a:hover,a:active {
+    text-decoration: none;
+    color:#333333;
+}
+
 .visible {
 	display: block;
 }

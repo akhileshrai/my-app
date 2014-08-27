@@ -30,12 +30,15 @@ angular.module('directory', ['ngRoute', 'directory.controllers', 'directory.serv
 		        templateUrl: 'templates/employee-list.html',
 		        controller: 'EmployeeListCtrl'
 		      }).
-		      when('/options', {
+		      when('/rate', {
 		        templateUrl: 'templates/mode-detail.html',
 		        controller: 'OptionCtrl'
 		      }).
-		      
+		      when('/watch', {
+		        templateUrl: 'templates/watch.html',
+		        controller: 'watchCtrl'
+		      }).
 		      otherwise({
-		        redirectTo: '/search'
+		        redirectTo: '/rate'
 		      });
 		  }]);
