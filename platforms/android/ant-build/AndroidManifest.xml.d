@@ -1,2 +1,2 @@
-C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\ant-build\AndroidManifest.xml : \
-C:\Users\Akhilesh\Documents\GitHub\my-app\platforms\android\AndroidManifest.xml \
+C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\ant-build\AndroidManifest.xml : \
+C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\AndroidManifest.xml \

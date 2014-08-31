@@ -10,7 +10,7 @@ angular.module('directory.controllers', [])
     })
     .controller('EmployeeListCtrl', function ($scope, Employees) {
 
-        $scope.searchKey = "";
+        $scope.searchPlate = "";
 
         $scope.clearSearch = function () {
             $scope.searchKey = "";
@@ -19,7 +19,8 @@ angular.module('directory.controllers', [])
         };
 
         $scope.search = function () {
-            $scope.fares = Employees.query({name: $scope.searchKey});
+        	console.log('searching')
+            $scope.fares = Employees.query({Plate: $scope.searchPlate});
         };
 
         $scope.fares = Employees.query();
@@ -28,22 +29,27 @@ angular.module('directory.controllers', [])
         
     })
     
-    .controller('watchCtrl', function ($scope, Fares) {
+    .controller('watchCtrl', function ($scope, Watch) {
     	console.log('watching position');
-		var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+    	$scope.position = '';
+		var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 300000 });
 		function onSuccess(position) {
 		    //var element = document.getElementById('geolocation');
-		    element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+		    $scope.position += 'Latitude: '  + position.coords.latitude      + '<br />' +
 		                        'Longitude: ' + position.coords.longitude     + '<br />' +
-		                        '<hr />'      + element.innerHTML;
-		    console.log(position.coords.latitude, position.coords.longitude);
+		                        '<hr />';
+		    Watch.save({lat:position.coords.latitude,lng:position.coords.longitude}, function(response){
+		    	console.log ('got a response');
+				$scope.message = response.message;
+			});
+		    //console.log(position.coords.latitude, position.coords.longitude);
 		}
 		
 		// onError Callback receives a PositionError object
 		//
 		function onError(error) {
-		    alert('code: '    + error.code    + '\n' +
-		          'message: ' + error.message + '\n');
+		    $scope.position = 'Latitude: Couldn\'t find position';
+		    
 		}
 
 		
