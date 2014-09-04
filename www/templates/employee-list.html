@@ -2,9 +2,9 @@
 
     <div class="header-holder">
         <div class="input-plate">
-            <input id="searchState" type="search" placeholder="KA" maxlength="2" autocorrect="off" >
-            <input id="searchSeg1" type="search" placeholder="01" maxlength="2" autocorrect="off" >
-            <input id="searchSeg2" type="search" placeholder="MD" maxlength="2" autocorrect="off" >
+            <input id="searchState" type="search" placeholder="KA" ng-model="searchState" maxlength="2" autocorrect="off" >
+            <input id="searchSeg1" type="search" placeholder="01" ng-model="searchSeg1" maxlength="2" autocorrect="off" >
+            <input id="searchSeg2" type="search" placeholder="MD" ng-model="searchSeg2" maxlength="2" autocorrect="off" >
             <input id="searchPlate" type="search" placeholder="0000" ng-model="searchPlate" maxlength="4" autocorrect="off" >
             <button class="button button-clear" ng-click="clearSearch()">X</button>
             <button class="button button-clear" ng-click="search()">Search</button>

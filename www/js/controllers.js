@@ -20,7 +20,7 @@ angular.module('directory.controllers', [])
 
         $scope.search = function () {
         	console.log('searching')
-            $scope.fares = Employees.query({Plate: $scope.searchPlate});
+            $scope.fares = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate});
         };
 
         $scope.fares = Employees.query();
