@@ -17,29 +17,51 @@ angular.module('directory.controllers', [])
         $scope.driverId = '';
 
         $scope.clearSearch = function () {
-            $scope.searchKey = "";
-            $scope.fares = Employees.query();
+            $scope.searchState = "";
+            $scope.searchSeg1 = "";
+            $scope.searchSeg2 = "";
+            $scope.searchPlate = "";
+            //$scope.fares = Employees.query();
+            //options = $scope.fares;
+        };
+        $scope.clearDriver = function () {
+            $scope.firstName = "";
+            $scope.lastName = "";
+            
+            //$scope.fa = Employees.query();
             //options = $scope.fares;
         };
 
+        $scope.addDriver = function () {
+            console.log('Adding Driver', $scope.firstName, $scope.lastName);
+            $scope.driverAdded = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate, firstName:$scope.firstName, lastName: $scope.lastName});
+
+        };
         $scope.search = function () {
             $scope.fares = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate});
             $scope.fares.$promise.then(function (result) {
 			    if (result.length===1){
-			    	$scope.oneResult = true;
+			    	$scope.oneResult = 1;
 			    	$scope.driverId = result[0]["id"];
+			    	$scope.chosenDriver = result[0];
+			    	
 			    }
-			    else {	
-			    	$scope.oneResult = false;
-			    };
+			    else if (result.length===0) {	
+			    	$scope.oneResult = 0;
+			    }
+			    else {
+			    	$scope.oneResult = 2;
+			    }
 			    
 			    console.log($scope.oneResult);
 			});
         };
         $scope.scoreDriver = function () {
         	$scope.ScoreIt = Employees.query({userId:userId, driverId:$scope.driverId, rating:$scope.driverRating});
-	       	console.log("scoring tnis ", $scope.fares[0].Score, $scope.ScoreIt);
-        	$scope.ScoreIt.$promise.then(function (result) { console.log('hiiiiiiii');});
+        	$scope.ScoreIt.$promise.then(function (result) { 
+        		$scope.chosenDriver.Score = result[0].rating;
+        		console.log('hii rating', result.rating, result[0]);
+        		});
 
         };
 

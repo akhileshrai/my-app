@@ -157,6 +157,28 @@ a:link,a:visited,a:hover,a:active {
 	width:95%;
 	padding-left: 0.2em;
 }
+.input-plate {
+    margin: auto;
+    padding-left: 0.2em;
+    width: 22em;
+}
+
+#searchPlate {
+	width:4em;
+	display:inline-block;
+	text-align: center;
+}
+#searchState, #searchSeg1, #searchSeg2 {
+	width:2em;
+	display:inline-block;
+	text-align: center;
+}
+#driverRating {
+	width:2em;
+	display:inline-block;
+	text-align: center;
+}
+
 .active-page {
 	background:#4B946A
 }

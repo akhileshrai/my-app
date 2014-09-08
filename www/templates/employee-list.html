@@ -13,19 +13,15 @@
     </div>
     <div class="header-holder">
         <div ng-switch="oneResult">
-        	<div ng-switch-when="true" class="input-plate">
-            	<ul>
-	            	<li ng-repeat="employee in fares" type="item-text-wrap" class="item-avatar">
-			                {{employee.id}}
-			                {{employee.firstName}} {{employee.lastName}}
-			                {{employee.Score}}
-			        </li>
-		        </ul>
+        	<div ng-switch-when="1" class="input-plate">
+			                {{chosenDriver.id}}
+			                {{chosenDriver.firstName}} {{chosenDriver.lastName}}
+			                {{chosenDriver.Score}}
         		<input id="driverRating" type="search" placeholder="5" maxlength="1" ng-model="$parent.driverRating" autocorrect="off" >
         		<button class="button button-clear" ng-click="scoreDriver()">Send Scores</button>
             	
             </div>
-            <div ng-switch-when="false">
+            <div ng-switch-when="2">
 	            <ul>
 		            <li ng-repeat="employee in fares" type="item-text-wrap" class="item-avatar">
 		                <!--<a href="#/employees/{{employee.id}}">hi</a>-->
@@ -35,6 +31,15 @@
 		            </li>
 	        	</ul>
 	        </div>
+	        <div ng-switch-when="0">
+      	        <div class="input-plate">
+		            <input id="firstName" type="search" placeholder="First Name" ng-model="$parent.firstName" maxlength="15" autocorrect="off" >
+		            <input id="lastName" type="search" placeholder="Last Name" ng-model="$parent.lastName" maxlength="15" autocorrect="off" >
+		            <button class="button button-clear" ng-click="clearDriver()">X</button>
+		            <button class="button button-clear" ng-click="addDriver()">Add Driver</button>
+		        </div>
+	        </div>
+
 
         </div>
     </div>
