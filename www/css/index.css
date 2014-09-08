@@ -171,8 +171,14 @@ a:link,a:visited,a:hover,a:active {
 #searchState, #searchSeg1, #searchSeg2 {
 	width:2em;
 	display:inline-block;
-text-align: center;
+	text-align: center;
 }
+#driverRating {
+	width:2em;
+	display:inline-block;
+	text-align: center;
+}
+
 .active-page {
 	background:#4B946A
 }

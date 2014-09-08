@@ -1,4 +1,6 @@
 //var fares='';
+var userId = '1';
+//
 angular.module('directory.controllers', [])
 
     .controller("MyController", function($scope) {
@@ -11,6 +13,8 @@ angular.module('directory.controllers', [])
     .controller('EmployeeListCtrl', function ($scope, Employees) {
 
         $scope.searchPlate = "";
+        $scope.userId = userId;
+        $scope.driverId = '';
 
         $scope.clearSearch = function () {
             $scope.searchKey = "";
@@ -19,8 +23,24 @@ angular.module('directory.controllers', [])
         };
 
         $scope.search = function () {
-        	console.log('searching')
             $scope.fares = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate});
+            $scope.fares.$promise.then(function (result) {
+			    if (result.length===1){
+			    	$scope.oneResult = true;
+			    	$scope.driverId = result[0]["id"];
+			    }
+			    else {	
+			    	$scope.oneResult = false;
+			    };
+			    
+			    console.log($scope.oneResult);
+			});
+        };
+        $scope.scoreDriver = function () {
+        	$scope.ScoreIt = Employees.query({userId:userId, driverId:$scope.driverId, rating:$scope.driverRating});
+	       	console.log("scoring tnis ", $scope.fares[0].Score, $scope.ScoreIt);
+        	$scope.ScoreIt.$promise.then(function (result) { console.log('hiiiiiiii');});
+
         };
 
         $scope.fares = Employees.query();

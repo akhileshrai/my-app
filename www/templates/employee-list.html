@@ -11,13 +11,33 @@
 
         </div>
     </div>
+    <div class="header-holder">
+        <div ng-switch="oneResult">
+        	<div ng-switch-when="true" class="input-plate">
+            	<ul>
+	            	<li ng-repeat="employee in fares" type="item-text-wrap" class="item-avatar">
+			                {{employee.id}}
+			                {{employee.firstName}} {{employee.lastName}}
+			                {{employee.Score}}
+			        </li>
+		        </ul>
+        		<input id="driverRating" type="search" placeholder="5" maxlength="1" ng-model="$parent.driverRating" autocorrect="off" >
+        		<button class="button button-clear" ng-click="scoreDriver()">Send Scores</button>
+            	
+            </div>
+            <div ng-switch-when="false">
+	            <ul>
+		            <li ng-repeat="employee in fares" type="item-text-wrap" class="item-avatar">
+		                <!--<a href="#/employees/{{employee.id}}">hi</a>-->
+		                <img src="pics/{{employee.pic}}"/>
+		                {{employee.firstName}} {{employee.lastName}}
+		                <p>{{employee.Score}}</p>
+		            </li>
+	        	</ul>
+	        </div>
 
+        </div>
+    </div>
 
-        <ul>
-            <li ng-repeat="employee in fares" type="item-text-wrap" class="item-avatar">
-                <!--<a href="#/employees/{{employee.id}}">hi</a>-->
-                <img src="pics/{{employee.pic}}"/>
-                {{employee.firstName}} {{employee.lastName}}
-                <p>{{employee.Score}}</p>
-            </li>
-        </ul>
+	<div class="header-holder">
+	</div>
