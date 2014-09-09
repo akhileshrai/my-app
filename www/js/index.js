@@ -87,8 +87,7 @@ function initializeMap() {
     	changeMap();}
     	); 
 	//console.Log(mode.Mode);
-    for (mode in options)
-	{	
+    for (mode in options) {	
 		(function(mode){
 			//console.log(options[mode].Mode);
 			document.getElementById(options[mode].Mode).addEventListener("click", function() {
@@ -97,25 +96,8 @@ function initializeMap() {
 	    })(mode);
 	}
 	
-	for (var i=1;i<4;i++){
-		(function(i){
-       		var pageId = 'page-'+i+'-title';
-    		console.log(pageId);
-			document.getElementById(pageId).addEventListener("click", function() {
-	    	changePage(i);
-	    	}, false);
-    	})(i);
-	}
-	
 };
 
-function changePage (pageNum) {
-	document.getElementById('page-'+curPage).className = "sub-page-content invisible";
-	document.getElementById('page-'+curPage+'-title').className = "sub-page";
-	curPage = pageNum;
-	document.getElementById('page-'+pageNum).className = "sub-page-content visible";
-	document.getElementById('page-'+curPage+'-title').className = "sub-page active-page";	
-}
 
 function changeMap() {
 	console.log("changemap called");

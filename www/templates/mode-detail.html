@@ -1,5 +1,29 @@
+<a href="#rate" class="sub-page active-page" id="page-1-title">Pick</a>
+<a href="#search" class="sub-page" id="page-2-title">Rate</a>
+<a href="#watch" class="sub-page" id="page-3-title">Reco</a>
+      	
+<div class="header-holder">
+	<div class="resultsLeft">
+      	<div class="locations">
+      		<input type="text" name="Start Location" id="start_loc" class="input-loc" value="" placeholder="Starting here"/></input>
+      		<input type="text" name="End Location" id="end_loc" class="input-loc" value="" placeholder="Ending here"/></input>
+      	</div>
+    </div>
+  	<div class="resultsRight">
+  		<div class="results" id="resultDist"></div>
+  	</div>
+</div>
+
 <div class = "icon-holders">
 	<div class = "icons" ng-repeat="option in modes">
 		<img ng-click="myData.doClick(option.Mode)" class="iconimg passive" id="{{option.Mode}}" src="img/{{option.Mode}}.jpg">
 	</div>
+</div>
+<div class = "fare-results">
+	<div class="resultsMatrix" id="resultFare"></div>
+	<div class="modecomments"></div>
+</div>
+
+<div class="map-holder">
+	<div id="map"></div>
 </div>

@@ -135,11 +135,15 @@ h1 {
     font-weight: bold;
     margin-bottom: 12px;
     padding: 10px 0;
-    width:32%;
+    width:33%;
     float:left;
     text-align:center;
     border:#226622 1px solid;
     border-collapse: collapse;
+}
+
+#page-3-title {
+	width:34%;
 }
 
 a:link,a:visited,a:hover,a:active {
