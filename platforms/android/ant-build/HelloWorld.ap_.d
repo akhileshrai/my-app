@@ -51,6 +51,9 @@ C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\i
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\MegaCabs.jpg \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\Meru.jpg \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\Ola.jpg \
+C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\ratebg.jpg \
+C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\ratebg.png \
+C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\ratebg.psd \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\img\Uber.jpg \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\app.js \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\calculator.js \

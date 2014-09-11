@@ -140,6 +140,11 @@ h1 {
     text-align:center;
     border:#226622 1px solid;
     border-collapse: collapse;
+    background:#FFFFFF url('../img/ratebg.jpg') no-repeat scroll -1185px 0;
+}
+.active-page {
+	background:#262;
+	color: #ADA;
 }
 
 #page-3-title {
@@ -183,9 +188,6 @@ a:link,a:visited,a:hover,a:active {
 	text-align: center;
 }
 
-.active-page {
-	background:#4B946A
-}
 
 #map {
 	display: block;;

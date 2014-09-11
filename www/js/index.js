@@ -18,52 +18,25 @@
  */
 
 
-var app = {
-	
 
-    // Application Constructor
-    initialize: function() {
-    	console.log("app initialize called");
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-	    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
-	        document.addEventListener("deviceready", this.onDeviceReady, false);
-	    } else {
-	        this.onDeviceReady();
-	    }
-	    //document.addEventListener('click', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-       	try {
-		        initializeMap();
-	       		mapOptions = {
-					center: new google.maps.LatLng(bang_lat, bang_lng),
-					zoom: 10,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-		        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+function receivedEvent(id) {
+   	try {
+	        initializeMap();
+       		mapOptions = {
+				center: new google.maps.LatLng(bang_lat, bang_lng),
+				zoom: 10,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+	        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	        console.log('result hi')
 
-		}
-		catch (error) {
-			noNetwork("No network!");
-		}
-	
-        
-        console.log('Received Event: ');
-    }
+	}
+	catch (error) {
+		noNetwork("No network!");
+	}
+
+    
+    console.log('Received Event: ');
 };
 
 function initializeMap() {

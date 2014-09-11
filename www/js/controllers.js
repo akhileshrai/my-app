@@ -52,15 +52,12 @@ angular.module('directory.controllers', [])
 			    else {
 			    	$scope.oneResult = 2;
 			    }
-			    
-			    console.log($scope.oneResult);
 			});
         };
         $scope.scoreDriver = function () {
         	$scope.ScoreIt = Employees.query({userId:userId, driverId:$scope.driverId, rating:$scope.driverRating});
         	$scope.ScoreIt.$promise.then(function (result) { 
         		$scope.chosenDriver.Score = result[0].rating;
-        		console.log('hii rating', result.rating, result[0]);
         		});
 
         };
@@ -100,13 +97,16 @@ angular.module('directory.controllers', [])
     
     .controller('OptionCtrl', function ($scope, Fares) {
 	    console.log('optioncctrl' + options);
-	
+        receivedEvent('deviceready');
+
+
 		if (options=='') {
 	        options = Fares.query();
-	        $scope.modes = {};
 	        options.$promise.then(function (result) {
-			    $scope.modes = returnModes(result);
+	   		    $scope.modes = returnModes(result);
+			    
 			});
+		
 		}
 		else $scope.modes = returnModes(options);
         
@@ -115,19 +115,14 @@ angular.module('directory.controllers', [])
 			var lookup = {};
 			var items = options;
 			var result = [];
-		
-		    
-		    	
 			for (item in items) {
+				
 				var name = items[item].Mode;
 				if (name!=null && !(name in lookup)) {
 					lookup[name] = 1;
 					result.push({"Mode":name});
 				}
 			}
-			console.log(result);
-			
-			//return result;
 			return result;
 		};
 		
@@ -138,18 +133,5 @@ angular.module('directory.controllers', [])
             
         };
 
-
-        //console.log(mode);
-    })
-/**
-    .controller('EmployeeDetailCtrl', function($scope, $stateParams, Employees) {
-        console.log('details');
-        $scope.employee = Employees.get({employeeId: $stateParams.employeeId});
-    })
-
-    .controller('EmployeeReportsCtrl', function ($scope, $stateParams, Employees) {
-        console.log('reports');
-        $scope.employee = Employees.get({employeeId: $stateParams.employeeId, data: 'reports'});
-    })*/;
-    
+    });
  	
