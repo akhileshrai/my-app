@@ -61,6 +61,7 @@ C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\j
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\globals.js \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\helpers.js \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\index.js \
+C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\services-test.js \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\js\services.js \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\lib\angular-resource.js \
 C:\Users\akhil_000\Documents\GitHub\my-app\my-app\platforms\android\assets\www\lib\angular-route.js \

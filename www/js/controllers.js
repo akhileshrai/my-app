@@ -34,7 +34,13 @@ angular.module('directory.controllers', [])
 
         $scope.addDriver = function () {
             console.log('Adding Driver', $scope.firstName, $scope.lastName);
-            $scope.driverAdded = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate, firstName:$scope.firstName, lastName: $scope.lastName});
+            chosenDriver = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate, firstName:$scope.firstName, lastName: $scope.lastName});
+	    	chosenDriver.$promise.then(function (result) {
+	    		$scope.chosenDriver = result[0];
+	    		$scope.driverId = result[0]["_id"];
+	    		$scope.oneResult = 1;
+			});
+			//$scope.chosenDriver = result[0];
 
         };
         $scope.search = function () {
@@ -42,7 +48,7 @@ angular.module('directory.controllers', [])
             $scope.fares.$promise.then(function (result) {
 			    if (result.length===1){
 			    	$scope.oneResult = 1;
-			    	$scope.driverId = result[0]["id"];
+			    	$scope.driverId = result[0]["_id"];
 			    	$scope.chosenDriver = result[0];
 			    	
 			    }
@@ -55,6 +61,7 @@ angular.module('directory.controllers', [])
 			});
         };
         $scope.scoreDriver = function () {
+        	//console.log('driverID',driverId);
         	$scope.ScoreIt = Employees.query({userId:userId, driverId:$scope.driverId, rating:$scope.driverRating});
         	$scope.ScoreIt.$promise.then(function (result) { 
         		$scope.chosenDriver.Score = result[0].rating;
@@ -98,6 +105,8 @@ angular.module('directory.controllers', [])
     .controller('OptionCtrl', function ($scope, Fares) {
 	    console.log('optioncctrl' + options);
         receivedEvent('deviceready');
+        var uuid = device.uuid;
+		console.log ("uuid:", uuid)
 
 
 		if (options=='') {
