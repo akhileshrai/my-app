@@ -21,16 +21,11 @@ angular.module('directory.controllers', [])
             $scope.searchSeg1 = "";
             $scope.searchSeg2 = "";
             $scope.searchPlate = "";
-            //$scope.fares = Employees.query();
-            //options = $scope.fares;
         };
         $scope.clearDriver = function () {
             $scope.firstName = "";
             $scope.lastName = "";
-            
-            //$scope.fa = Employees.query();
-            //options = $scope.fares;
-        };
+       };
 
         $scope.addDriver = function () {
             console.log('Adding Driver', $scope.firstName, $scope.lastName);
@@ -40,8 +35,6 @@ angular.module('directory.controllers', [])
 	    		$scope.driverId = result[0]["_id"];
 	    		$scope.oneResult = 1;
 			});
-			//$scope.chosenDriver = result[0];
-
         };
         $scope.search = function () {
             $scope.fares = Employees.query({State:$scope.searchState, SEG1: $scope.searchSeg1, SEG2: $scope.searchSeg2, Plate: $scope.searchPlate});
@@ -61,7 +54,6 @@ angular.module('directory.controllers', [])
 			});
         };
         $scope.scoreDriver = function () {
-        	//console.log('driverID',driverId);
         	$scope.ScoreIt = Employees.query({userId:userId, driverId:$scope.driverId, rating:$scope.driverRating});
         	$scope.ScoreIt.$promise.then(function (result) { 
         		$scope.chosenDriver.Score = result[0].rating;
@@ -70,7 +62,6 @@ angular.module('directory.controllers', [])
         };
 
         $scope.fares = Employees.query();
-    	//options = Employees.query();
         console.log('updated fares');
         
     })
