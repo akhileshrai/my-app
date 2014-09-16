@@ -140,10 +140,11 @@ h1 {
     text-align:center;
     border:#226622 1px solid;
     border-collapse: collapse;
+    color:#333333;
     background:#FFFFFF url('../img/ratebg.jpg') no-repeat scroll -1185px 0;
 }
 .active-page {
-	background:#262;
+	background:url("../img/ratebg.jpg") no-repeat scroll 0 0 #ffffff;
 	color: #ADA;
 }
 
@@ -153,7 +154,6 @@ h1 {
 
 a:link,a:visited,a:hover,a:active {
     text-decoration: none;
-    color:#333333;
 }
 
 .visible {
@@ -277,7 +277,7 @@ img .iconimg{
 }
 
 input {
-	background-color:#FFFF77;
+	background-color:#eeffdd;
 }
 .active {
 	outline:solid #262;

@@ -29,6 +29,14 @@
 		                <!--<a href="#/employees/{{employee.id}}">hi</a>-->
 		                <img src="pics/{{employee.pic}}"/>
 		                {{employee.firstName}} {{employee.lastName}}
+		                <li ng-repeat="star in [1,2,3,4,5]">
+		                	<div>hi</div>
+		                	<div ng-switch="employee.Score >= star">
+		                		<div ng-switch-when="true">*</div>
+		                		<div ng-switch-when="false">*</div>
+		                	</div>
+		                	<p>{{employee.Score}}</p>
+		                </li>
 		                <p>{{employee.Score}}</p>
 		            </li>
 	        	</ul>
